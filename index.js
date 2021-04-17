@@ -1,21 +1,68 @@
-/* global Chart */
+/* global Chart, axios */
+
+var vueStars = 0;
+var vueWatchers = 0;
+var vueForks = 0;
+var angularStars = 0;
+var angularWatchers = 0;
+var angularForks = 0;
+var emberStars = 0;
+var emberWatchers = 0;
+var emberForks = 0;
+var svelteStars = 0;
+var svelteWatchers = 0;
+var svelteForks = 0;
+var reactStars = 0;
+var reactWatchers = 0;
+var reactForks = 0;
+
+// function
+axios.get("https://api.github.com/repos/vuejs/vue").then((response) => {
+  console.log(response.data);
+  vueForks = response.data.forks;
+  vueWatchers = response.data.subscribers_count;
+  vueStars = response.data.stargazers_count;
+});
+axios.get("https://api.github.com/repos/angular/angular.js").then((response) => {
+  console.log(response.data);
+  angularForks = response.data.forks;
+  angularWatchers = response.data.subscribers_count;
+  angularStars = response.data.stargazers_count;
+});
+axios.get("https://api.github.com/repos/emberjs/ember.js").then((response) => {
+  console.log(response.data);
+  emberForks = response.data.forks;
+  emberWatchers = response.data.subscribers_count;
+  emberStars = response.data.stargazers_count;
+});
+axios.get("https://api.github.com/repos/sveltejs/svelte").then((response) => {
+  console.log(response.data);
+  svelteForks = response.data.forks;
+  svelteWatchers = response.data.subscribers_count;
+  svelteStars = response.data.stargazers_count;
+});
+axios.get("https://api.github.com/repos/facebook/react").then((response) => {
+  console.log(response.data);
+  reactForks = response.data.forks;
+  reactWatchers = response.data.subscribers_count;
+  reactStars = response.data.stargazers_count;
+});
 
 var ctx = document.getElementById("myChart").getContext("2d");
 var myChart = new Chart(ctx, {
   type: "bar",
   data: {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    labels: ["Vue.js", "Angular.js", "Ember.js", "Svelte", "React"],
     datasets: [
       {
-        label: "# of Votes",
-        data: [12, 19, 3, 5, 2, 3],
+        label: "# of Forks",
+        data: [12, 19, 3, 5, 2],
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
           "rgba(255, 206, 86, 0.2)",
           "rgba(75, 192, 192, 0.2)",
           "rgba(153, 102, 255, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
         ],
         borderColor: [
           "rgba(255, 99, 132, 1)",
@@ -23,7 +70,6 @@ var myChart = new Chart(ctx, {
           "rgba(255, 206, 86, 1)",
           "rgba(75, 192, 192, 1)",
           "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
         ],
         borderWidth: 1,
       },
