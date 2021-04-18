@@ -16,70 +16,83 @@ var reactStars = 0;
 var reactWatchers = 0;
 var reactForks = 0;
 
-// function
-axios.get("https://api.github.com/repos/vuejs/vue").then((response) => {
-  console.log(response.data);
-  vueForks = response.data.forks;
-  vueWatchers = response.data.subscribers_count;
-  vueStars = response.data.stargazers_count;
-});
-axios.get("https://api.github.com/repos/angular/angular.js").then((response) => {
-  console.log(response.data);
-  angularForks = response.data.forks;
-  angularWatchers = response.data.subscribers_count;
-  angularStars = response.data.stargazers_count;
-});
-axios.get("https://api.github.com/repos/emberjs/ember.js").then((response) => {
-  console.log(response.data);
-  emberForks = response.data.forks;
-  emberWatchers = response.data.subscribers_count;
-  emberStars = response.data.stargazers_count;
-});
-axios.get("https://api.github.com/repos/sveltejs/svelte").then((response) => {
-  console.log(response.data);
-  svelteForks = response.data.forks;
-  svelteWatchers = response.data.subscribers_count;
-  svelteStars = response.data.stargazers_count;
-});
-axios.get("https://api.github.com/repos/facebook/react").then((response) => {
-  console.log(response.data);
-  reactForks = response.data.forks;
-  reactWatchers = response.data.subscribers_count;
-  reactStars = response.data.stargazers_count;
-});
+function waitFor(conditionFunction) {
+  const poll = (resolve) => {
+    if (conditionFunction()) resolve();
+    else setTimeout((_) => poll(resolve), 400);
+  };
+  return new Promise(poll);
+}
 
-var ctx = document.getElementById("myChart").getContext("2d");
-var myChart = new Chart(ctx, {
-  type: "bar",
-  data: {
-    labels: ["Vue.js", "Angular.js", "Ember.js", "Svelte", "React"],
-    datasets: [
-      {
-        label: "# of Forks",
-        data: [12, 19, 3, 5, 2],
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-        ],
-        borderWidth: 1,
-      },
-    ],
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true,
+function getData() {
+  axios.get("https://api.github.com/repos/vuejs/vue").then((response) => {
+    console.log(response.data);
+    vueForks = response.data.forks_count;
+    vueWatchers = response.data.subscribers_count;
+    vueStars = response.data.stargazers_count;
+  });
+  axios.get("https://api.github.com/repos/angular/angular.js").then((response) => {
+    console.log(response.data);
+    angularForks = response.data.forks_count;
+    angularWatchers = response.data.subscribers_count;
+    angularStars = response.data.stargazers_count;
+  });
+  axios.get("https://api.github.com/repos/emberjs/ember.js").then((response) => {
+    console.log(response.data);
+    emberForks = response.data.forks_count;
+    emberWatchers = response.data.subscribers_count;
+    emberStars = response.data.stargazers_count;
+  });
+  axios.get("https://api.github.com/repos/sveltejs/svelte").then((response) => {
+    console.log(response.data);
+    svelteForks = response.data.forks_count;
+    svelteWatchers = response.data.subscribers_count;
+    svelteStars = response.data.stargazers_count;
+  });
+  axios.get("https://api.github.com/repos/facebook/react").then((response) => {
+    console.log(response.data);
+    reactForks = response.data.forks_count;
+    reactWatchers = response.data.subscribers_count;
+    reactStars = response.data.stargazers_count;
+  });
+}
+function makeCharts() {
+  var forks = document.getElementById("stars").getContext("2d");
+  var myChart = new Chart(forks, {
+    type: "bar",
+    data: {
+      labels: ["Vue.js", "Angular.js", "Ember.js", "Svelte", "React"],
+      datasets: [
+        {
+          label: "# of Forks",
+          data: [vueForks, angularForks, emberForks, svelteForks, reactForks],
+          backgroundColor: [
+            "rgba(255, 99, 132, 0.2)",
+            "rgba(54, 162, 235, 0.2)",
+            "rgba(255, 206, 86, 0.2)",
+            "rgba(75, 192, 192, 0.2)",
+            "rgba(153, 102, 255, 0.2)",
+          ],
+          borderColor: [
+            "rgba(255, 99, 132, 1)",
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 206, 86, 1)",
+            "rgba(75, 192, 192, 1)",
+            "rgba(153, 102, 255, 1)",
+          ],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
       },
     },
-  },
-});
+  });
+}
+
+getData();
+waitFor((_) => reactStars).then((_) => makeCharts());
