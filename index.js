@@ -18,8 +18,11 @@ var reactForks = 0;
 
 function waitFor(conditionFunction) {
   const poll = (resolve) => {
-    if (conditionFunction()) resolve();
-    else setTimeout((_) => poll(resolve), 400);
+    if (conditionFunction()) {
+      resolve();
+    } else {
+      setTimeout((_) => poll(resolve), 400);
+    }
   };
   return new Promise(poll);
 }
@@ -57,15 +60,85 @@ function getData() {
   });
 }
 function makeCharts() {
-  var forks = document.getElementById("stars").getContext("2d");
-  var myChart = new Chart(forks, {
+  var forks = document.getElementById("forkChart").getContext("2d");
+  var forkChart = new Chart(forks, {
     type: "bar",
     data: {
       labels: ["Vue.js", "Angular.js", "Ember.js", "Svelte", "React"],
       datasets: [
         {
-          label: "# of Forks",
+          label: "Forks",
           data: [vueForks, angularForks, emberForks, svelteForks, reactForks],
+          backgroundColor: [
+            "rgba(255, 99, 132, 0.2)",
+            "rgba(54, 162, 235, 0.2)",
+            "rgba(255, 206, 86, 0.2)",
+            "rgba(75, 192, 192, 0.2)",
+            "rgba(153, 102, 255, 0.2)",
+          ],
+          borderColor: [
+            "rgba(255, 99, 132, 1)",
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 206, 86, 1)",
+            "rgba(75, 192, 192, 1)",
+            "rgba(153, 102, 255, 1)",
+          ],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+  var watchers = document.getElementById("watchersChart").getContext("2d");
+  var watchersChart = new Chart(watchers, {
+    type: "bar",
+    data: {
+      labels: ["Vue.js", "Angular.js", "Ember.js", "Svelte", "React"],
+      datasets: [
+        {
+          label: "Watchers",
+          data: [vueWatchers, angularWatchers, emberWatchers, svelteWatchers, reactWatchers],
+          backgroundColor: [
+            "rgba(255, 99, 132, 0.2)",
+            "rgba(54, 162, 235, 0.2)",
+            "rgba(255, 206, 86, 0.2)",
+            "rgba(75, 192, 192, 0.2)",
+            "rgba(153, 102, 255, 0.2)",
+          ],
+          borderColor: [
+            "rgba(255, 99, 132, 1)",
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 206, 86, 1)",
+            "rgba(75, 192, 192, 1)",
+            "rgba(153, 102, 255, 1)",
+          ],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+  var stars = document.getElementById("starsChart").getContext("2d");
+  var starsChart = new Chart(stars, {
+    type: "bar",
+    data: {
+      labels: ["Vue.js", "Angular.js", "Ember.js", "Svelte", "React"],
+      datasets: [
+        {
+          label: "Stars",
+          data: [vueStars, angularStars, emberStars, svelteStars, reactStars],
           backgroundColor: [
             "rgba(255, 99, 132, 0.2)",
             "rgba(54, 162, 235, 0.2)",
