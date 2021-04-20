@@ -59,6 +59,7 @@ function getData() {
     reactStars = response.data.stargazers_count;
   });
 }
+
 function makeCharts() {
   var forks = document.getElementById("forkChart").getContext("2d");
   var forkChart = new Chart(forks, {
@@ -167,37 +168,41 @@ function makeCharts() {
   });
   var overall = document.getElementById("overallChart").getContext("2d");
   var overallChart = new Chart(overall, {
-    type: "pie",
+    type: "bar",
     data: {
-      labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+      labels: ["Vue.js", "Angular.js", "Ember.js", "Svelte", "React"],
       datasets: [
         {
-          label: "# of Votes",
-          data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: [
-            "rgba(255, 99, 132, 0.2)",
-            "rgba(54, 162, 235, 0.2)",
-            "rgba(255, 206, 86, 0.2)",
-            "rgba(75, 192, 192, 0.2)",
-            "rgba(153, 102, 255, 0.2)",
-            "rgba(255, 159, 64, 0.2)",
-          ],
-          borderColor: [
-            "rgba(255, 99, 132, 1)",
-            "rgba(54, 162, 235, 1)",
-            "rgba(255, 206, 86, 1)",
-            "rgba(75, 192, 192, 1)",
-            "rgba(153, 102, 255, 1)",
-            "rgba(255, 159, 64, 1)",
-          ],
+          label: "Forks",
+          data: [60, 30, 10, 20, 50],
+          backgroundColor: ["rgba(255, 99, 132, 0.2)"],
+          borderColor: ["rgba(255, 99, 132, 1)"],
+          borderWidth: 1,
+        },
+        {
+          label: "Watchers",
+          data: [10, 40, 90, 18, 45],
+          backgroundColor: ["rgba(54, 162, 235, 0.2)"],
+          borderColor: ["rgba(54, 162, 235, 1)"],
+          borderWidth: 1,
+        },
+        {
+          label: "Stars",
+          data: [48, 23, 18, 32, 95],
+          backgroundColor: ["rgba(255, 206, 86, 0.2)"],
+          borderColor: ["rgba(255, 206, 86, 1)"],
           borderWidth: 1,
         },
       ],
     },
     options: {
       scales: {
+        x: {
+          stacked: true,
+        },
         y: {
           beginAtZero: true,
+          stacked: true,
         },
       },
     },
