@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 2rem;
-  font-family: sans-serif;
+  font-family: "Ubuntu", sans-serif;
 }
 
 h1 {
@@ -40,4 +40,12 @@ h1 {
 
 canvas {
   max-width: 100%;
+}
+
+@media (max-width: 1000px) {
+  .col {
+    -webkit-box-flex: 100%;
+    -ms-flex: 100%;
+    flex: 100%;
+  }
 }
