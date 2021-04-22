@@ -8,11 +8,23 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.0/dist/chart.min.js"></script>
     <script src="index.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <canvas id="forkChart" width="400" height="400"></canvas>
-    <canvas id="watchersChart" width="400" height="400"></canvas>
-    <canvas id="starsChart" width="400" height="400"></canvas>
-    <canvas id="overallChart" width="400" height="400"></canvas>
+    <h1>Javascript Framework Watchers</h1>
+    <div class="row">
+      <div class="col"
+        ><div class="canvas-container"><canvas id="forkChart"></canvas></div
+      ></div>
+      <div class="col"
+        ><div class="canvas-container"><canvas id="watchersChart"></canvas></div
+      ></div>
+      <div class="col"
+        ><div class="canvas-container"><canvas id="starsChart"></canvas></div
+      ></div>
+      <div class="col"
+        ><div class="canvas-container"><canvas id="overallChart"></canvas></div
+      ></div>
+    </div>
   </body>
 </html>
