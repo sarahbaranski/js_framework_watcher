@@ -58,9 +58,66 @@ function getData() {
     reactWatchers = response.data.subscribers_count;
     reactStars = response.data.stargazers_count;
   });
+
+
+
 }
 
 function makeCharts() {
+  var popForks = [
+    { language: "vue", number: vueForks },
+    { language: "angular", number: angularForks },
+    { language: "ember", number: emberForks },
+    { language: "svelte", number: svelteForks },
+    { language: "react", number: reactForks }
+  ];
+  var compareForks = popForks.slice(0);
+  compareForks.sort(function (a, b) {
+    return b.number - a.number;
+  });
+  compareForks[0]["Points"] = 5;
+  compareForks[1]["Points"] = 4;
+  compareForks[2]["Points"] = 3;
+  compareForks[3]["Points"] = 2;
+  compareForks[4]["Points"] = 1;
+
+  console.log(compareForks);
+  var finalForks = []
+  finalForks.push(compareForks.find(x => x.language === 'vue').Points);
+  finalForks.push(compareForks.find(x => x.language === 'angular').Points);
+  finalForks.push(compareForks.find(x => x.language === 'ember').Points);
+  finalForks.push(compareForks.find(x => x.language === 'svelte').Points);
+  finalForks.push(compareForks.find(x => x.language === 'react').Points);
+  console.log(finalForks);
+
+  var popWatchers = [
+    { language: "vue", number: vueWatchers },
+    { language: "angular", number: angularWatchers },
+    { language: "ember", number: emberWatchers },
+    { language: "svelte", number: svelteWatchers },
+    { language: "react", number: reactWatchers }
+  ];
+  var compareWatchers = popWatchers.slice(0);
+  compareWatchers.sort(function (a, b) {
+    return b.number - a.number;
+  });
+  console.log(compareWatchers);
+  console.log(compareWatchers[0]["language"]);
+
+  var popStars = [
+    { language: "vue", number: vueStars },
+    { language: "angular", number: angularStars },
+    { language: "ember", number: emberStars },
+    { language: "svelte", number: svelteStars },
+    { language: "react", number: reactStars }
+  ];
+  var compareStars = popStars.slice(0);
+  compareStars.sort(function (a, b) {
+    return b.number - a.number;
+  });
+  console.log(compareStars);
+
+
   var forks = document.getElementById("forkChart").getContext("2d");
   var forkChart = new Chart(forks, {
     type: "bar",
@@ -198,7 +255,7 @@ function makeCharts() {
       datasets: [
         {
           label: "Forks",
-          data: [60, 30, 10, 20, 50],
+          data: finalForks,
           backgroundColor: ["rgba(255, 99, 132, 0.2)"],
           borderColor: ["rgba(255, 99, 132, 1)"],
           borderWidth: 1,
@@ -237,6 +294,7 @@ function makeCharts() {
       },
     },
   });
+
 }
 
 getData();
