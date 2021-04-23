@@ -68,7 +68,6 @@ function makeCharts() {
       labels: ["Vue.js", "Angular.js", "Ember.js", "Svelte", "React"],
       datasets: [
         {
-          label: "Forks",
           data: [vueForks, angularForks, emberForks, svelteForks, reactForks],
           backgroundColor: [
             "rgba(255, 99, 132, 0.2)",
@@ -89,6 +88,15 @@ function makeCharts() {
       ],
     },
     options: {
+      plugins: {
+        legend: {
+          display: false
+        },
+        title: {
+          display: true,
+          text: 'Forks'
+        },
+      },
       scales: {
         y: {
           beginAtZero: true,
@@ -103,7 +111,6 @@ function makeCharts() {
       labels: ["Vue.js", "Angular.js", "Ember.js", "Svelte", "React"],
       datasets: [
         {
-          label: "Watchers",
           data: [vueWatchers, angularWatchers, emberWatchers, svelteWatchers, reactWatchers],
           backgroundColor: [
             "rgba(255, 99, 132, 0.2)",
@@ -124,6 +131,15 @@ function makeCharts() {
       ],
     },
     options: {
+      plugins: {
+        legend: {
+          display: false
+        },
+        title: {
+          display: true,
+          text: 'Watchers'
+        },
+      },
       scales: {
         y: {
           beginAtZero: true,
@@ -138,7 +154,6 @@ function makeCharts() {
       labels: ["Vue.js", "Angular.js", "Ember.js", "Svelte", "React"],
       datasets: [
         {
-          label: "Stars",
           data: [vueStars, angularStars, emberStars, svelteStars, reactStars],
           backgroundColor: [
             "rgba(255, 99, 132, 0.2)",
@@ -159,6 +174,15 @@ function makeCharts() {
       ],
     },
     options: {
+      plugins: {
+        legend: {
+          display: false
+        },
+        title: {
+          display: true,
+          text: 'Stars'
+        },
+      },
       scales: {
         y: {
           beginAtZero: true,
@@ -196,6 +220,12 @@ function makeCharts() {
       ],
     },
     options: {
+      plugins: {
+        title: {
+          display: true,
+          text: 'Overall Popularity'
+        },
+      },
       scales: {
         x: {
           stacked: true,
