@@ -58,9 +58,6 @@ function getData() {
     reactWatchers = response.data.subscribers_count;
     reactStars = response.data.stargazers_count;
   });
-
-
-
 }
 
 function makeCharts() {
@@ -69,7 +66,7 @@ function makeCharts() {
     { language: "angular", number: angularForks },
     { language: "ember", number: emberForks },
     { language: "svelte", number: svelteForks },
-    { language: "react", number: reactForks }
+    { language: "react", number: reactForks },
   ];
   var compareForks = popForks.slice(0);
   compareForks.sort(function (a, b) {
@@ -82,12 +79,12 @@ function makeCharts() {
   compareForks[4]["Points"] = 1;
 
   console.log(compareForks);
-  var finalForks = []
-  finalForks.push(compareForks.find(x => x.language === 'vue').Points);
-  finalForks.push(compareForks.find(x => x.language === 'angular').Points);
-  finalForks.push(compareForks.find(x => x.language === 'ember').Points);
-  finalForks.push(compareForks.find(x => x.language === 'svelte').Points);
-  finalForks.push(compareForks.find(x => x.language === 'react').Points);
+  var finalForks = [];
+  finalForks.push(compareForks.find((x) => x.language === "vue").Points);
+  finalForks.push(compareForks.find((x) => x.language === "angular").Points);
+  finalForks.push(compareForks.find((x) => x.language === "ember").Points);
+  finalForks.push(compareForks.find((x) => x.language === "svelte").Points);
+  finalForks.push(compareForks.find((x) => x.language === "react").Points);
   console.log(finalForks);
 
   var popWatchers = [
@@ -95,28 +92,52 @@ function makeCharts() {
     { language: "angular", number: angularWatchers },
     { language: "ember", number: emberWatchers },
     { language: "svelte", number: svelteWatchers },
-    { language: "react", number: reactWatchers }
+    { language: "react", number: reactWatchers },
   ];
   var compareWatchers = popWatchers.slice(0);
   compareWatchers.sort(function (a, b) {
     return b.number - a.number;
   });
+  compareWatchers[0]["Points"] = 5;
+  compareWatchers[1]["Points"] = 4;
+  compareWatchers[2]["Points"] = 3;
+  compareWatchers[3]["Points"] = 2;
+  compareWatchers[4]["Points"] = 1;
+
   console.log(compareWatchers);
-  console.log(compareWatchers[0]["language"]);
+  var finalWatchers = [];
+  finalWatchers.push(compareWatchers.find((x) => x.language === "vue").Points);
+  finalWatchers.push(compareWatchers.find((x) => x.language === "angular").Points);
+  finalWatchers.push(compareWatchers.find((x) => x.language === "ember").Points);
+  finalWatchers.push(compareWatchers.find((x) => x.language === "svelte").Points);
+  finalWatchers.push(compareWatchers.find((x) => x.language === "react").Points);
+  console.log(finalWatchers);
 
   var popStars = [
     { language: "vue", number: vueStars },
     { language: "angular", number: angularStars },
     { language: "ember", number: emberStars },
     { language: "svelte", number: svelteStars },
-    { language: "react", number: reactStars }
+    { language: "react", number: reactStars },
   ];
   var compareStars = popStars.slice(0);
   compareStars.sort(function (a, b) {
     return b.number - a.number;
   });
-  console.log(compareStars);
+  compareStars[0]["Points"] = 5;
+  compareStars[1]["Points"] = 4;
+  compareStars[2]["Points"] = 3;
+  compareStars[3]["Points"] = 2;
+  compareStars[4]["Points"] = 1;
 
+  console.log(compareStars);
+  var finalStars = [];
+  finalStars.push(compareStars.find((x) => x.language === "vue").Points);
+  finalStars.push(compareStars.find((x) => x.language === "angular").Points);
+  finalStars.push(compareStars.find((x) => x.language === "ember").Points);
+  finalStars.push(compareStars.find((x) => x.language === "svelte").Points);
+  finalStars.push(compareStars.find((x) => x.language === "react").Points);
+  console.log(finalStars);
 
   var forks = document.getElementById("forkChart").getContext("2d");
   var forkChart = new Chart(forks, {
@@ -147,11 +168,11 @@ function makeCharts() {
     options: {
       plugins: {
         legend: {
-          display: false
+          display: false,
         },
         title: {
           display: true,
-          text: 'Forks'
+          text: "Forks",
         },
       },
       scales: {
@@ -190,11 +211,11 @@ function makeCharts() {
     options: {
       plugins: {
         legend: {
-          display: false
+          display: false,
         },
         title: {
           display: true,
-          text: 'Watchers'
+          text: "Watchers",
         },
       },
       scales: {
@@ -233,11 +254,11 @@ function makeCharts() {
     options: {
       plugins: {
         legend: {
-          display: false
+          display: false,
         },
         title: {
           display: true,
-          text: 'Stars'
+          text: "Stars",
         },
       },
       scales: {
@@ -262,14 +283,14 @@ function makeCharts() {
         },
         {
           label: "Watchers",
-          data: [10, 40, 90, 18, 45],
+          data: finalWatchers,
           backgroundColor: ["rgba(54, 162, 235, 0.2)"],
           borderColor: ["rgba(54, 162, 235, 1)"],
           borderWidth: 1,
         },
         {
           label: "Stars",
-          data: [48, 23, 18, 32, 95],
+          data: finalStars,
           backgroundColor: ["rgba(255, 206, 86, 0.2)"],
           borderColor: ["rgba(255, 206, 86, 1)"],
           borderWidth: 1,
@@ -280,7 +301,7 @@ function makeCharts() {
       plugins: {
         title: {
           display: true,
-          text: 'Overall Popularity'
+          text: "Overall Popularity",
         },
       },
       scales: {
@@ -294,7 +315,6 @@ function makeCharts() {
       },
     },
   });
-
 }
 
 getData();
